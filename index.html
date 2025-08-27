@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--
+	NOTES:
+	1. All tokens are represented by '$' sign in the template.
+	2. You can write your code only wherever mentioned.
+	3. All occurrences of existing tokens will be replaced by their appropriate values.
+	4. Blank lines will be removed automatically.
+	5. Remove unnecessary comments before creating your template.
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="authoring-tool" content="Adobe_Animate_CC">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar System Discovery Journey</title>
+
+<!-- Custom font and scale-down only styling -->
+<style>
+@font-face {
+    font-family: 'Arial Rounded MT Bold';
+    src: url('fonts/Arial Rounded MT W02 Bold.woff2') format('woff2');
+    font-display: swap;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #1A0940;
+    overflow: hidden;
+    font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+}
+
+/* Scale down only - never larger than 1920x1080 */
+#animation_container {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    
+    /* SCALE DOWN ONLY - never bigger than native size */
+    width: min(100vw, 1920px) !important;
+    height: min(56.25vw, 1080px) !important;
+    max-width: 1920px !important;
+    max-height: 1080px !important;
+    
+    background-color: #230D4D !important;
+}
+
+/* Keep canvas at native resolution when possible */
+#canvas {
+    width: 100% !important;
+    height: 100% !important;
+    /* REMOVED pixelated CSS - was making everything worse */
+    background-color: #230D4D !important;
+}
+
+#dom_overlay_container {
+    width: 100% !important;
+    height: 100% !important;
+}
+</style>
+
+<!-- write your code here -->
+<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+<script src="Final Exported Animate Practice Project 1.js"></script>
+<script>
+var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+function init() {
+	canvas = document.getElementById("canvas");
+	anim_container = document.getElementById("animation_container");
+	dom_overlay_container = document.getElementById("dom_overlay_container");
+	var comp=AdobeAn.getComposition("E6F4B32199FAD545ABBA8E06B84DD070");
+	var lib=comp.getLibrary();
+	handleComplete({},comp);
+}
+function handleComplete(evt,comp) {
+	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+	var lib=comp.getLibrary();
+	var ss=comp.getSpriteSheet();
+	exportRoot = new lib.FinalExportedAnimatePracticeProject1();
+	stage = new lib.Stage(canvas);
+	stage.enableMouseOver();	
+	//Registers the "tick" event listener.
+	fnStartAnimation = function() {
+		stage.addChild(exportRoot);
+		createjs.Ticker.framerate = lib.properties.fps;
+		createjs.Ticker.addEventListener("tick", stage);
+		
+		// Apply custom font after stage is ready
+		setTimeout(() => {
+			applyCustomFont();
+		}, 500);
+	}	    
+	//Code to support hidpi screens and responsive scaling.
+	// CHANGED: Back to false to prevent automatic scaling issues
+	AdobeAn.makeResponsive(false,'both',false,1,[canvas,anim_container,dom_overlay_container]);	
+	AdobeAn.compositionLoaded(lib.properties.id);
+	fnStartAnimation();
+}
+
+// Function to apply custom font with proper sizing
+function applyCustomFont() {
+    try {
+        const fontFamily = "'Arial Rounded MT Bold', Arial, sans-serif";
+        
+        // Apply font with sizes that work well at native resolution
+        if (exportRoot && exportRoot.clickCounter) {
+            exportRoot.clickCounter.font = "24px " + fontFamily;
+        }
+        if (exportRoot && exportRoot.instructionText) {
+            exportRoot.instructionText.font = "20px " + fontFamily;
+        }
+        if (exportRoot && exportRoot.completionText) {
+            exportRoot.completionText.font = "36px " + fontFamily;
+        }
+        
+        // Force stage update to apply changes
+        if (stage) {
+            stage.update();
+        }
+        
+        console.log('Custom font applied with proper sizing');
+        
+    } catch (error) {
+        console.log('Font application error:', error);
+    }
+}
+</script>
+<!-- write your code here -->
+</head>
+<body onload="init();" style="margin:0px;">
+	<div id="animation_container" style="background-color:#230D4D; width:1920px; height:1080px">
+		<canvas id="canvas" width="1920" height="1080" style="position: absolute; display: block; background-color:#230D4D;"></canvas>
+		<div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:1920px; height:1080px; position: absolute; left: 0px; top: 0px; display: block;">
+		</div>
+	</div>
+</body>
+</html>
