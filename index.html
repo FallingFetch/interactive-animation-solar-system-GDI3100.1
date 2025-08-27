@@ -29,9 +29,9 @@ body {
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
     
-    /* SCALE DOWN ONLY - never bigger than native size */
-    width: min(100vw, 1920px) !important;
-    height: min(56.25vw, 1080px) !important;
+    /* Calculate scale based on both width AND height constraints */
+    width: min(100vw, 100vh * (16/9), 1920px) !important;
+    height: min(100vh, 100vw * (9/16), 1080px) !important;
     max-width: 1920px !important;
     max-height: 1080px !important;
     
@@ -123,3 +123,4 @@ function applyCustomFont() {
 </html>
 
 </html>
+
