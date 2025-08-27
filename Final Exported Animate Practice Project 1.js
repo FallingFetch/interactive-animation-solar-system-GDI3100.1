@@ -10026,7 +10026,7 @@ if (reversed == null) { reversed = false; }
 		// 6. STARTUP
 		// ==========================================
 		
-		this.instructionText.text = "Click the button to journey through our solar system. Can you make it to the outer edge?";
+		this.instructionText.text = "Click the button to experience the vastness of our solar system. Can you make it to the outer edge?";
 		this.clickCounter.text = "0";
 		this.completionText.text = "";
 		
@@ -10049,7 +10049,7 @@ if (reversed == null) { reversed = false; }
 	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(1));
 
 	// Completion
-	this.completionText = new cjs.Text("Congratulations! You got to the edge of our solar system in \n<> \nclicks!", "80px 'Arial Rounded MT Bold'", "#F2F2FF");
+	this.completionText = new cjs.Text("Congratulations, you reached the edge of our solar system! And in \n<> \nclicks!", "80px 'Arial Rounded MT Bold'", "#F2F2FF");
 	this.completionText.name = "completionText";
 	this.completionText.textAlign = "center";
 	this.completionText.lineHeight = 108;
