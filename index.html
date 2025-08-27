@@ -1,12 +1,5 @@
 <!DOCTYPE html>
-<!--
-	NOTES:
-	1. All tokens are represented by '$' sign in the template.
-	2. You can write your code only wherever mentioned.
-	3. All occurrences of existing tokens will be replaced by their appropriate values.
-	4. Blank lines will be removed automatically.
-	5. Remove unnecessary comments before creating your template.
--->
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -14,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Solar System Discovery Journey</title>
 
-<!-- Custom font and scale-down only styling -->
 <style>
 @font-face {
     font-family: 'Arial Rounded MT Bold';
@@ -30,7 +22,7 @@ body {
     font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
 }
 
-/* Scale down only - never larger than 1920x1080 */
+/* Only scales down from 1920x1080 to not lose resolution*/
 #animation_container {
     position: fixed !important;
     top: 50% !important;
@@ -46,11 +38,10 @@ body {
     background-color: #230D4D !important;
 }
 
-/* Keep canvas at native resolution when possible */
+/* Canvas stays at native resolution when possible */
 #canvas {
     width: 100% !important;
     height: 100% !important;
-    /* REMOVED pixelated CSS - was making everything worse */
     background-color: #230D4D !important;
 }
 
@@ -60,7 +51,6 @@ body {
 }
 </style>
 
-<!-- write your code here -->
 <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
 <script src="Final Exported Animate Practice Project 1.js"></script>
 <script>
@@ -74,7 +64,6 @@ function init() {
 	handleComplete({},comp);
 }
 function handleComplete(evt,comp) {
-	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
 	var lib=comp.getLibrary();
 	var ss=comp.getSpriteSheet();
 	exportRoot = new lib.FinalExportedAnimatePracticeProject1();
@@ -86,35 +75,32 @@ function handleComplete(evt,comp) {
 		createjs.Ticker.framerate = lib.properties.fps;
 		createjs.Ticker.addEventListener("tick", stage);
 		
-		// Apply custom font after stage is ready
+		// Applyies custom font once stage is ready
 		setTimeout(() => {
 			applyCustomFont();
 		}, 500);
 	}	    
-	//Code to support hidpi screens and responsive scaling.
-	// CHANGED: Back to false to prevent automatic scaling issues
 	AdobeAn.makeResponsive(false,'both',false,1,[canvas,anim_container,dom_overlay_container]);	
 	AdobeAn.compositionLoaded(lib.properties.id);
 	fnStartAnimation();
 }
 
-// Function to apply custom font with proper sizing
+// To apply custom font and sizing
 function applyCustomFont() {
     try {
         const fontFamily = "'Arial Rounded MT Bold', Arial, sans-serif";
         
-        // Apply font with sizes that work well at native resolution
         if (exportRoot && exportRoot.clickCounter) {
-            exportRoot.clickCounter.font = "24px " + fontFamily;
+            exportRoot.clickCounter.font = "28px " + fontFamily;
         }
         if (exportRoot && exportRoot.instructionText) {
-            exportRoot.instructionText.font = "20px " + fontFamily;
+            exportRoot.instructionText.font = "40px " + fontFamily;
         }
         if (exportRoot && exportRoot.completionText) {
-            exportRoot.completionText.font = "36px " + fontFamily;
+            exportRoot.completionText.font = "50px " + fontFamily;
         }
         
-        // Force stage update to apply changes
+        // Applies changes
         if (stage) {
             stage.update();
         }
@@ -126,7 +112,6 @@ function applyCustomFont() {
     }
 }
 </script>
-<!-- write your code here -->
 </head>
 <body onload="init();" style="margin:0px;">
 	<div id="animation_container" style="background-color:#230D4D; width:1920px; height:1080px">
@@ -135,4 +120,6 @@ function applyCustomFont() {
 		</div>
 	</div>
 </body>
+</html>
+
 </html>
