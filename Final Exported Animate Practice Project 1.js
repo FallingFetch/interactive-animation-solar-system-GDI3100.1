@@ -9793,12 +9793,6 @@ if (reversed == null) { reversed = false; }
 		if(this.totalFrames == 1) {
 			this.isSingleFrame = true;
 		}
-		// SIMPLE SOLAR SYSTEM DISCOVERY - FIXED VERSION
-		// Canvas: 1920x1080 (Landscape orientation)
-		
-		// ==========================================
-		// 1. BASIC SETUP
-		// ==========================================
 		
 		let clickCount = 0;
 		const MOVEMENT_DISTANCE = 58; // Distance per click
@@ -9807,13 +9801,11 @@ if (reversed == null) { reversed = false; }
 		let pendingMovement = 0; // Accumulated movement waiting to be applied
 		let isAnimating = false; // Track if animation is running
 		
-		// Sun object (separate from planets so it won't get tooltips later)
 		const sun = {
 		    sprite: null,
 		    startX: 50 // Sun starts at left edge
 		};
 		
-		// REALISTIC PROPORTIONAL SPACING
 		const planets = [
 			{name: "Mercury", sprite: null, startX: 2100, startY: 0},
 		    {name: "Venus", sprite: null, startX: 4200, startY: 0},
@@ -9826,10 +9818,6 @@ if (reversed == null) { reversed = false; }
 		    {name: "Neptune", sprite: null, startX: 25300, startY: 0},
 		    {name: "Pluto", sprite: null, startX: 27760, startY: 0}
 		];
-		
-		// ==========================================
-		// 2. MOVEMENT FUNCTIONS - ANIMATION STACKING ENABLED
-		// ==========================================
 		
 		function movePlanetsLeft(onComplete) {
 		    const tweens = [];
@@ -9891,10 +9879,7 @@ if (reversed == null) { reversed = false; }
 		        onComplete();
 		    }
 		}
-		// ==========================================
-		// 3. FIXED COMPLETION CHECK - ACTUALLY CHECK PLUTO POSITION
-		// ==========================================
-		
+
 		function checkForPlutoAtCenter() {
 		    const pluto = planets[planets.length - 1]; // Get Pluto
 		    if (!pluto.sprite) return false;
@@ -9927,9 +9912,6 @@ if (reversed == null) { reversed = false; }
 		    console.log(`MISSION COMPLETE! Pluto actually reached center at ${clickCount} clicks!`);
 		}
 		
-		// ==========================================
-		// 4. BUTTON EVENT - STACKING ENABLED
-		// ==========================================
 		
 		this.moveButton.addEventListener("click", () => {
 		    clickCount++;
@@ -9952,9 +9934,6 @@ if (reversed == null) { reversed = false; }
 		    }
 		});
 		
-		// ==========================================
-		// STAR BACKGROUND LOOPING - TWO GROUPS
-		// ==========================================
 		function moveStarsParallax() {
 		    if (!this.starBackground || !this.starBackground.starGroup1 || !this.starBackground.starGroup2) return;
 		    const parallaxSpeed = MOVEMENT_DISTANCE * 0.3; // 30% of planet speed
@@ -9963,12 +9942,10 @@ if (reversed == null) { reversed = false; }
 		        group.x -= parallaxSpeed;
 		    });
 		}
-		// ==========================================
-		// 5. INITIALIZATION - FIXED Z-INDEX ISSUE
-		// ==========================================
+
 		
 		function initializePlanets() {
-		    // ✅ Initialize Sun
+		    // Initialize Sun
 		    try {
 		        sun.sprite = this.sunSprite;
 		        if (sun.sprite) {
@@ -9983,7 +9960,7 @@ if (reversed == null) { reversed = false; }
 		        console.log(`Sun initialization error: ${error}`);
 		    }
 		
-		    // ✅ Reference the planetLayer instance from the timeline
+		    // Reference the planetLayer instance from the timeline
 		    const planetsContainer = this.planetLayer;
 		    if (!planetsContainer) {
 		        console.log("ERROR: planetLayer instance not found on stage!");
@@ -9991,10 +9968,10 @@ if (reversed == null) { reversed = false; }
 		    }
 		    console.log("planetsContainer found at index:", this.getChildIndex(planetsContainer));
 		
-		    // ✅ Clear any existing planets
+		    // Clear any existing planets
 		    planetsContainer.removeAllChildren();
 		
-		    // ✅ Initialize planets and add them to planetsContainer
+		    // Initialize planets and add them to planetsContainer
 		    planets.forEach((planet) => {
 		        const spriteName = planet.name + "Sprite";
 		        try {
@@ -10012,7 +9989,7 @@ if (reversed == null) { reversed = false; }
 		        }
 		    });
 		
-		    // ✅ Debug: log final stage children order
+		    // Debug: log final stage children order
 		    console.log("Final stage children order:");
 		    for (let i = 0; i < this.numChildren; i++) {
 		        const c = this.getChildAt(i);
@@ -10022,10 +9999,6 @@ if (reversed == null) { reversed = false; }
 		
 		
 		
-		// ==========================================
-		// 6. STARTUP
-		// ==========================================
-		
 		this.instructionText.text = "Click the button to experience the vastness of our solar system. Can you make it to the outer edge?";
 		this.clickCounter.text = "0";
 		this.completionText.text = "";
@@ -10033,8 +10006,7 @@ if (reversed == null) { reversed = false; }
 		initializePlanets.call(this);
 		
 		moveStarsParallax.call(this);
-		
-		// REMOVED: All background color changing code as requested
+
 		
 		const pluto = planets[planets.length - 1];
 		const clicksNeeded = Math.ceil((pluto.startX - STAGE_CENTER) / MOVEMENT_DISTANCE);
